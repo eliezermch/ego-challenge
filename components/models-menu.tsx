@@ -1,0 +1,156 @@
+'use client';
+
+import { useState } from 'react';
+import Image from 'next/image';
+
+const ModelsMenu = () => {
+  const [activeFilter, setActiveFilter] = useState(false);
+  const [activeSort, setActiveSort] = useState(false);
+  const [selectedFilter, setSelectedFilter] = useState('Todos');
+  const [selectedSort, setSelectedSort] = useState('Nada');
+
+  const handleFilterSelect = (option: string) => {
+    setSelectedFilter(option);
+    setActiveFilter(false);
+  };
+
+  const handleSortSelect = (option: string) => {
+    setSelectedSort(option);
+    setActiveSort(false);
+  };
+
+  const filterOptions = [
+    'Todos',
+    'Autos',
+    'Pickups y Comerciales',
+    'SUVs y Crossovers',
+  ];
+
+  const sortOptions = [
+    { value: 'Nada', label: 'Nada' },
+    {
+      value: 'De menor a mayor precio',
+      label: (
+        <>
+          De <strong>menor</strong> a <strong>mayor</strong> precio
+        </>
+      ),
+    },
+    {
+      value: 'De mayor a menor precio',
+      label: (
+        <>
+          De <strong>mayor</strong> a <strong>menor</strong> precio
+        </>
+      ),
+    },
+    {
+      value: 'Más nuevos primero',
+      label: (
+        <>
+          Más <strong>nuevos</strong> primero
+        </>
+      ),
+    },
+    {
+      value: 'Más viejos primero',
+      label: (
+        <>
+          Más <strong>viejos</strong> primero
+        </>
+      ),
+    },
+  ];
+
+  return (
+    <div className="w-auto flex justify-between items-start sm:items-center mx-[15px] pb-[15px] border-b-[1px] border-[#D8D8D8] relative">
+      {/* Filter Menu */}
+      <div className="relative">
+        <button
+          onClick={() => setActiveFilter(!activeFilter)}
+          className="flex items-center justify-center gap-[8px] py-2 focus:outline-none"
+        >
+          <span
+            className={`text-[14px] leading-[14px] font-semibold tracking-[0.08px] ${
+              activeFilter ? 'text-[#373737]' : 'text-foreground'
+            }`}
+          >
+            Filtrar por
+          </span>
+          <Image
+            src="/assets/icons/arrow-down.svg"
+            alt="Dropdown"
+            width={6}
+            height={7}
+            className={`transition-transform duration-200 ${
+              activeFilter ? 'rotate-180' : ''
+            }`}
+          />
+        </button>
+
+        {activeFilter && (
+          <div className="absolute top-full left-0 mt-[10px] w-[158px] h-[145px] bg-white shadow-[2px_8px_20px_0px_rgba(0,0,0,0.14)] rounded-[6px] z-50 flex flex-col justify-between">
+            {filterOptions.map((option, index) => (
+              <button
+                key={index}
+                className={`text-left pl-[8px] py-[10px] border-b-[1px] border-[#D8D8D8] last:border-b-0 text-foreground hover:bg-[#F7F7F7] hover:font-bold ${
+                  selectedFilter === option ? 'bg-[#D1D6D634]' : ''
+                }`}
+                onClick={() => handleFilterSelect(option)}
+              >
+                <p className="text-[10px] font-regular tracking-[-0.1px]">
+                  {option}
+                </p>
+              </button>
+            ))}
+          </div>
+        )}
+      </div>
+
+      {/* Sort Menu */}
+      <div className="relative">
+        <button
+          onClick={() => setActiveSort(!activeSort)}
+          className="flex items-center gap-[8px] py-2 focus:outline-none"
+        >
+          <span
+            className={`text-[14px] leading-[14px] font-semibold tracking-[0.08px] ${
+              activeSort ? 'text-[#373737]' : 'text-foreground'
+            }`}
+          >
+            Ordenar por
+          </span>
+          <Image
+            src="/assets/icons/arrow-down.svg"
+            alt="Dropdown"
+            width={6}
+            height={7}
+            className={`transition-transform duration-200 ${
+              activeSort ? 'rotate-180' : ''
+            }`}
+          />
+        </button>
+
+        {activeSort && (
+          <div className="absolute top-full right-0 mt-[10px] w-[158px] h-[182px] bg-white shadow-[2px_8px_20px_0px_rgba(0,0,0,0.14)] rounded-[6px] z-50 flex flex-col justify-between">
+            {sortOptions.map((option, index) => (
+              <button
+                key={index}
+                className={`text-left pl-[8px] py-[10px] border-b-[1px] border-[#D8D8D8] last:border-b-0 text-[14px] text-foreground hover:bg-[#F7F7F7] hover:font-bold ${
+                  selectedSort === option.value ? 'bg-[#D1D6D634]' : ''
+                }`}
+                onClick={() => handleSortSelect(option.value)}
+              >
+                <p className="text-[10px] font-regular tracking-[-0.1px]">
+                  {option.label}
+                </p>
+              </button>
+            ))}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
+
+export { ModelsMenu };

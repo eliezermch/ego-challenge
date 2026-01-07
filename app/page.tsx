@@ -1,9 +1,13 @@
-import { ThemeToggle } from '@/components/theme-toggle';
+import { ModelsMenu } from '@/components/models-menu';
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen items-center justify-center font-sans bg-background text-foreground">
-      <main className="flex min-h-screen w-full flex-col items-center justify-between sm:items-start"></main>
-    </div>
+    <main className="w-full h-full">
+      <h1 className="text-foreground text-[35px] leading-[44px] tracking-[-0.7px] font-bold p-[15px] mt-[35px] mb-[24px]">
+        Descubrí todos los modelos
+      </h1>
+
+      <ModelsMenu />
+    </main>
   );
 }
