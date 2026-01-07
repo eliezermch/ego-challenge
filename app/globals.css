@@ -1,26 +1,52 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:is(.dark *));
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #FFFFFF;
+  --foreground: #191919;
+  --color-border: #CCCCCC;
+  --color-border-secondary: #D8D8D8;
+  --primary: #191919;
+  --secondary: #373737;
+  --carousel-bg: #F7F7F7;
+  --pagination-active-color: #4A4A4A;
+  --pagination-color: #C5C5C5;
+}
+
+/* For manual class-based dark mode switching via next-themes */
+.dark {
+  --background: #0a0a0a;
+  --foreground: #ededed;
+  --color-border: #333333;
+  --color-border-secondary: #404040;
+  --primary: #ededed;
+  --secondary: #a1a1a1;
+  --carousel-bg: #1a1a1a;
+  --pagination-active-color: #d4d4d4;
+  --pagination-color: #525252;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-border: var(--color-border);
+  --color-border-secondary: var(--color-border-secondary);
+  --color-primary: var(--primary);
+  --color-secondary: var(--secondary);
+  --color-carousel-bg: var(--carousel-bg);
+  --color-pagination-active: var(--pagination-active-color);
+  --color-pagination: var(--pagination-color);
+  
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  /* * {
+    @apply border-border outline-ring/50;
+  } */
+  body {
+    @apply bg-background text-foreground;
   }
-}
-
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
 }
