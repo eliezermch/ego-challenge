@@ -1,3 +1,4 @@
+import { CarModelList } from '@/components/car-model-list';
 import { ModelsMenu } from '@/components/models-menu';
 
 export default function Home() {
@@ -8,6 +9,7 @@ export default function Home() {
       </h1>
 
       <ModelsMenu />
+      <CarModelList />
     </main>
   );
 }
