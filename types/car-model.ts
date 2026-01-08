@@ -1,3 +1,15 @@
+export interface ModelFeature {
+  name: string;
+  description: string;
+  image: string;
+}
+
+export interface ModelHighlight {
+  title: string;
+  content: string;
+  image: string;
+}
+
 export interface CarModel {
   id: number;
   name: string;
@@ -6,4 +18,8 @@ export interface CarModel {
   price: number;
   thumbnail: string;
   photo: string;
+  title: string;
+  description: string;
+  model_features: ModelFeature[];
+  model_highlights: ModelHighlight[];
 }
