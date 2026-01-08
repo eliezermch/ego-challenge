@@ -1,22 +1,48 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
 import Image from 'next/image';
 
 const ModelsMenu = () => {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+
   const [activeFilter, setActiveFilter] = useState(false);
   const [activeSort, setActiveSort] = useState(false);
   const [selectedFilter, setSelectedFilter] = useState('Todos');
-  const [selectedSort, setSelectedSort] = useState('Nada');
+
+  // Get initial sort from URL or default
+  const currentSort = searchParams.get('sort') || 'Nada';
+  const [selectedSort, setSelectedSort] = useState(currentSort);
+
+  // Sync state with URL changes
+  useEffect(() => {
+    setSelectedSort(searchParams.get('sort') || 'Nada');
+  }, [searchParams]);
+
+  const updateQueryParams = (key: string, value: string) => {
+    const params = new URLSearchParams(searchParams.toString());
+
+    if (value === 'Todos' || value === 'Nada') {
+      params.delete(key);
+    } else {
+      params.set(key, value);
+    }
+
+    router.push(`/?${params.toString()}`, { scroll: false });
+  };
 
   const handleFilterSelect = (option: string) => {
     setSelectedFilter(option);
     setActiveFilter(false);
+    updateQueryParams('segment', option);
   };
 
   const handleSortSelect = (option: string) => {
     setSelectedSort(option);
     setActiveSort(false);
+    updateQueryParams('sort', option);
   };
 
   const filterOptions = [
@@ -29,7 +55,7 @@ const ModelsMenu = () => {
   const sortOptions = [
     { value: 'Nada', label: 'Nada' },
     {
-      value: 'De menor a mayor precio',
+      value: 'price_asc',
       label: (
         <>
           De <strong>menor</strong> a <strong>mayor</strong> precio
@@ -37,7 +63,7 @@ const ModelsMenu = () => {
       ),
     },
     {
-      value: 'De mayor a menor precio',
+      value: 'price_desc',
       label: (
         <>
           De <strong>mayor</strong> a <strong>menor</strong> precio
@@ -45,7 +71,7 @@ const ModelsMenu = () => {
       ),
     },
     {
-      value: 'Más nuevos primero',
+      value: 'year_desc',
       label: (
         <>
           Más <strong>nuevos</strong> primero
@@ -53,7 +79,7 @@ const ModelsMenu = () => {
       ),
     },
     {
-      value: 'Más viejos primero',
+      value: 'year_asc',
       label: (
         <>
           Más <strong>viejos</strong> primero

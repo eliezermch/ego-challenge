@@ -1,15 +1,19 @@
 import { CarModelList } from '@/components/car-model-list';
 import { ModelsMenu } from '@/components/models-menu';
 
-export default function Home() {
+export default async function Home(props: {
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+}) {
+  const searchParams = await props.searchParams;
+
   return (
-    <main className="w-full h-full">
+    <main className="w-full min-h-screen">
       <h1 className="text-foreground text-[35px] leading-[44px] tracking-[-0.7px] font-bold p-[15px] mt-[35px] mb-[24px]">
         Descubrí todos los modelos
       </h1>
 
       <ModelsMenu />
-      <CarModelList />
+      <CarModelList searchParams={searchParams} />
     </main>
   );
 }
