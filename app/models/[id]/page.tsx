@@ -10,7 +10,6 @@ export default async function ModelPage({
 }) {
   const { id } = await params;
   const model: CarModel = await getCarModelById(id);
-  console.log(model);
   return (
     <main>
       <CarDetails

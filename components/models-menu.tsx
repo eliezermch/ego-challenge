@@ -89,9 +89,10 @@ const ModelsMenu = () => {
   ];
 
   return (
-    <div className="w-auto flex justify-between items-start sm:items-center mx-[15px] pb-[15px] border-b-[1px] border-[#D8D8D8] relative">
+    <div className="w-auto flex justify-between items-start sm:items-center mx-[15px] pb-[15px] border-b-[1px] border-[#D8D8D8] relative lg:mx-[148px]">
       {/* Filter Menu */}
-      <div className="relative">
+      {/* Filter Menu - Mobile */}
+      <div className="relative lg:hidden">
         <button
           onClick={() => setActiveFilter(!activeFilter)}
           className="flex items-center justify-center gap-[8px] py-2 focus:outline-none"
@@ -131,6 +132,28 @@ const ModelsMenu = () => {
             ))}
           </div>
         )}
+      </div>
+
+      {/* Filter Menu - Desktop */}
+      <div className="hidden lg:flex items-center gap-[20px]">
+        <span className="text-[14px] font-semibold text-[#373737] tracking-[0.08px]">
+          Filtrar por
+        </span>
+        <div className="flex items-center gap-[6px]">
+          {filterOptions.map((option, index) => (
+            <button
+              key={index}
+              onClick={() => handleFilterSelect(option)}
+              className={`px-[16px] py-[6px] rounded-[18px] text-[14px] transition-all duration-200 ${
+                selectedFilter === option
+                  ? 'bg-[#F7F7F7] text-[#373737] font-medium'
+                  : 'text-foreground hover:text-[#373737]'
+              }`}
+            >
+              {option}
+            </button>
+          ))}
+        </div>
       </div>
 
       {/* Sort Menu */}

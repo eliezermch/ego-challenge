@@ -55,7 +55,7 @@ const CarModelList = async ({ searchParams }: CarModelListProps) => {
 
   return (
     <div>
-      <ul className="grid grid-cols-[repeat(auto-fill,minmax(250px,1fr))] gap-[38px] px-[54px] my-[60px]">
+      <ul className="grid grid-cols-[repeat(auto-fill,minmax(250px,1fr))] gap-[38px] px-[54px] my-[60px] lg:px-[148px] lg:grid-cols-[repeat(auto-fill,minmax(269px,1fr))] lg:gap-[20px] lg:gap-y-[80px]">
         {filteredModels.map((model: CarModel) => (
           <li key={model.id}>
             <Link
@@ -65,17 +65,24 @@ const CarModelList = async ({ searchParams }: CarModelListProps) => {
               <h2 className="text-[28px] font-semibold tracking-[-0.65px] leading-[30px]">
                 {model.name}
               </h2>
-              <div className="flex items-center gap-[12px]">
+              <div className="flex items-center gap-[12px] text-[14px] font-regular tracking-[-0.28px]">
                 <p>{model.year}</p>
                 {' | '}
                 <p>$ {parsePrice(model.price)}</p>
               </div>
               <Image
-                className="w-[233px] h-[112px] object-cover"
+                className="w-[233px] h-[112px] object-cover lg:hidden"
                 src={model.photo}
                 alt={model.name}
                 width={233}
                 height={112}
+              />
+              <Image
+                className="w-[269px] h-[132px] object-cover hidden lg:block"
+                src={model.photo}
+                alt={model.name}
+                width={269}
+                height={132}
               />
             </Link>
           </li>
