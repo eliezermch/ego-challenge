@@ -18,19 +18,31 @@ export default async function ModelPage({
         title={model.title}
         description={model.description}
         type="hero"
-        imageWidth={345}
-        imageHeight={200}
+        imageWidth={559}
+        imageHeight={320}
+        imageWidthMobile={345}
+        imageHeightMobile={200}
       />
-      <FeaturesCarousel items={model.model_features} />
+      <FeaturesCarousel
+        items={[
+          ...model.model_features,
+          ...model.model_features,
+          ...model.model_features,
+          ...model.model_features,
+        ]}
+      />
       {model.model_highlights.map((feature: ModelHighlight, index: number) => (
         <CarDetails
           key={index}
+          index={index}
           photo={feature.image}
           title={feature.title}
           description={feature.content}
           type="details"
-          imageWidth={345}
-          imageHeight={200}
+          imageWidthMobile={345}
+          imageHeightMobile={200}
+          imageWidth={559}
+          imageHeight={320}
         />
       ))}
     </main>

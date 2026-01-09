@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useCallback } from 'react';
 import useEmblaCarousel from 'embla-carousel-react';
-import { ModelFeature, ModelHighlight } from '@/types/car-model';
+import { ModelFeature } from '@/types/car-model';
 import { CarDetails } from './car-details';
 
 interface FeaturesCarouselProps {
@@ -42,15 +42,20 @@ export const FeaturesCarousel = ({ items }: FeaturesCarouselProps) => {
       <div className="overflow-hidden" ref={emblaRef}>
         <div className="flex">
           {items.map((feature, index) => (
-            <div className="flex-[0_0_90%] min-w-0 last:pr-4" key={index}>
+            <div
+              className="flex-[0_0_90%] min-w-0 last:pr-4 lg:flex-[0_0_25%] lg:pr-0 lg:pl-[10px]"
+              key={index}
+            >
               <CarDetails
                 photo={feature.image}
                 title={feature.name}
                 description={feature.description}
                 type="features"
                 className="mb-0"
-                imageWidth={330}
-                imageHeight={181}
+                imageWidthMobile={330}
+                imageHeightMobile={181}
+                imageWidth={268}
+                imageHeight={146}
               />
             </div>
           ))}

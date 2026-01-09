@@ -32,7 +32,7 @@ const Navbar = () => {
             <div className="hidden lg:flex items-center h-[70px]">
               <Link
                 href="/"
-                className={`h-full flex items-center px-[20px] text-[14px] font-semibold tracking-[0.08px] transition-all duration-200 border-b-4 ${
+                className={`h-full flex items-center px-[32px] text-[14px] font-semibold tracking-[0.08px] transition-all duration-200 border-b-4 ${
                   pathname === '/'
                     ? 'text-[#D0021B] border-[#D0021B]'
                     : 'text-[#191919] border-transparent hover:text-[#D0021B]'
