@@ -11,7 +11,7 @@ export default async function ModelPage({
   const { id } = await params;
   const model: CarModel = await getCarModelById(id);
   return (
-    <main>
+    <main className="">
       <CarDetails
         photo={model.photo}
         name={model.name}

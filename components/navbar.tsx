@@ -19,7 +19,7 @@ const Navbar = () => {
       <nav className="h-[70px] border-b-[1px] border-[#CCCCCC]/40 flex items-center justify-between p-[15px] lg:px-[32px] bg-background relative z-50">
         <div className="w-full flex items-center justify-between">
           <div className="flex items-center gap-[80px]">
-            <Link href="/" className="flex items-center">
+            <Link href="/" className="flex items-center hover:cursor-pointer">
               <Image
                 src="/assets/logo/Logo.svg"
                 alt="Logo"

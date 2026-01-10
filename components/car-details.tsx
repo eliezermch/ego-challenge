@@ -39,21 +39,21 @@ const CarDetails = ({
 
   const getDesktopLayout = () => {
     if (type === 'hero')
-      return 'lg:flex-row lg:items-center lg:justify-between lg:gap-[40px] lg:px-[148px] lg:mt-[80px] lg:gap-[80px]';
+      return 'max-w-[1920px] mx-auto lg:flex-row lg:items-center lg:justify-between lg:gap-[40px] lg:px-[148px] lg:mt-[60px] lg:gap-[80px]';
     if (type === 'details') {
       return index % 2 === 0
-        ? 'lg:flex-row-reverse lg:items-center lg:justify-between lg:gap-[40px] lg:px-[148px] lg:gap-[120px]'
-        : 'lg:flex-row lg:items-center lg:justify-between lg:gap-[40px] lg:px-[148px] lg:gap-[120px]';
+        ? 'max-w-[1920px] mx-auto lg:flex-row-reverse lg:items-center lg:justify-between lg:gap-[40px] lg:px-[148px] lg:gap-[120px]'
+        : 'max-w-[1920px] mx-auto lg:flex-row lg:items-center lg:justify-between lg:gap-[40px] lg:px-[148px] lg:gap-[120px]';
     }
     return '';
   };
 
   return (
     <div
-      className={`flex flex-col items-center gap-[6px] px-[15px] mt-[40px] ${getDesktopLayout()} ${className} ${
+      className={`flex flex-col ${getDesktopLayout()} ${className} ${
         type === 'hero' || type === 'details'
-          ? 'last:mb-[10px] pb-[60px]'
-          : 'mb-[20px]'
+          ? 'px-[15px] mt-[40px] last:mt-[0px] last:mb-[10px] lg:last:mb-[60px] pb-[60px] gap-[6px]'
+          : 'px-[15px] lg:px-[0px] lg:mt-[0px] mb-[20px] gap-[16px]'
       }`}
     >
       <div
@@ -63,7 +63,7 @@ const CarDetails = ({
           className={`w-full object-contain rounded-[6px] lg:hidden ${
             type === 'hero' || type === 'details'
               ? 'mb-[20px] lg:mb-0'
-              : 'mb-[4px]'
+              : 'mb-[4px] w-full h-full'
           }`}
           src={photo}
           alt={title}
@@ -71,10 +71,10 @@ const CarDetails = ({
           height={imageHeightMobile}
         />
         <Image
-          className={`w-full object-contain rounded-[6px] hidden lg:block ${
+          className={`w-full object-cover rounded-[6px] hidden lg:block ${
             type === 'hero' || type === 'details'
               ? 'mb-[20px] lg:mb-0'
-              : 'mb-[4px]'
+              : 'mb-[4px] w-[268px] h-[146px]'
           }`}
           src={photo}
           alt={title}
@@ -84,9 +84,11 @@ const CarDetails = ({
       </div>
 
       <div
-        className={`flex flex-col items-start gap-[20px] ${
-          type === 'hero' || type === 'details' ? 'lg:w-1/2' : ''
-        } ${type === 'details' && index % 2 === 0 ? 'pl-[40px]' : 'pr-[40px]'}`}
+        className={`flex flex-col items-start  ${
+          type === 'hero' || type === 'details'
+            ? 'lg:w-1/2 gap-[20px]'
+            : 'gap-[16px]'
+        } ${type === 'details' && index % 2 === 0 ? 'lg:pl-[40px]' : ''}`}
       >
         {type === 'hero' && (
           <span className="text-secondary text-[20px] font-semibold tracking-[0px] leading-[27px]">

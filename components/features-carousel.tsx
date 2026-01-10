@@ -4,15 +4,21 @@ import { useState, useEffect, useCallback } from 'react';
 import useEmblaCarousel from 'embla-carousel-react';
 import { ModelFeature } from '@/types/car-model';
 import { CarDetails } from './car-details';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 interface FeaturesCarouselProps {
   items: ModelFeature[];
 }
 
 export const FeaturesCarousel = ({ items }: FeaturesCarouselProps) => {
-  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: false });
+  const [emblaRef, emblaApi] = useEmblaCarousel({
+    align: 'start',
+    containScroll: 'trimSnaps',
+  });
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [scrollSnaps, setScrollSnaps] = useState<number[]>([]);
+  const [canScrollPrev, setCanScrollPrev] = useState(false);
+  const [canScrollNext, setCanScrollNext] = useState(false);
 
   const onInit = useCallback((emblaApi: any) => {
     setScrollSnaps(emblaApi.scrollSnapList());
@@ -20,13 +26,15 @@ export const FeaturesCarousel = ({ items }: FeaturesCarouselProps) => {
 
   const onSelect = useCallback((emblaApi: any) => {
     setSelectedIndex(emblaApi.selectedScrollSnap());
+    setCanScrollPrev(emblaApi.canScrollPrev());
+    setCanScrollNext(emblaApi.canScrollNext());
   }, []);
 
   useEffect(() => {
     if (!emblaApi) return;
 
     onInit(emblaApi);
-    onSelect(emblaApi);
+    onSelect(emblaApi); // Initial check
     emblaApi.on('reInit', onInit);
     emblaApi.on('reInit', onSelect);
     emblaApi.on('select', onSelect);
@@ -37,29 +45,65 @@ export const FeaturesCarousel = ({ items }: FeaturesCarouselProps) => {
     [emblaApi]
   );
 
+  const scrollPrev = useCallback(
+    () => emblaApi && emblaApi.scrollPrev(),
+    [emblaApi]
+  );
+
+  const scrollNext = useCallback(
+    () => emblaApi && emblaApi.scrollNext(),
+    [emblaApi]
+  );
+
   return (
     <div className="w-full bg-[#F7F7F7] pt-[50px] pb-[50px] mb-[60px]">
-      <div className="overflow-hidden" ref={emblaRef}>
-        <div className="flex">
-          {items.map((feature, index) => (
-            <div
-              className="flex-[0_0_90%] min-w-0 last:pr-4 lg:flex-[0_0_25%] lg:pr-0 lg:pl-[10px]"
-              key={index}
-            >
-              <CarDetails
-                photo={feature.image}
-                title={feature.name}
-                description={feature.description}
-                type="features"
-                className="mb-0"
-                imageWidthMobile={330}
-                imageHeightMobile={181}
-                imageWidth={268}
-                imageHeight={146}
-              />
-            </div>
-          ))}
+      <div className="relative flex items-center justify-center">
+        {/* Left Arrow (Desktop only) */}
+        <button
+          className={`hidden lg:flex items-center justify-center transition-opacity px-4 ${
+            !canScrollPrev ? 'opacity-30 cursor-default' : 'hover:opacity-75'
+          }`}
+          onClick={scrollPrev}
+          disabled={!canScrollPrev}
+          aria-label="Previous slide"
+        >
+          <ChevronLeft className="w-8 h-8 text-[#373737]" />
+        </button>
+
+        <div className="overflow-hidden w-full lg:max-w-7xl" ref={emblaRef}>
+          <div className="flex">
+            {items.map((feature, index) => (
+              <div
+                className="flex-[0_0_90%] min-w-0 last:pr-4 lg:flex-[0_0_25%] lg:pr-0 lg:pl-[24px]"
+                key={index}
+              >
+                <CarDetails
+                  photo={feature.image}
+                  title={feature.name}
+                  description={feature.description}
+                  type="features"
+                  className="mb-0 px-0"
+                  imageWidthMobile={330}
+                  imageHeightMobile={181}
+                  imageWidth={268}
+                  imageHeight={146}
+                />
+              </div>
+            ))}
+          </div>
         </div>
+
+        {/* Right Arrow (Desktop only) */}
+        <button
+          className={`hidden lg:flex items-center justify-center transition-opacity px-4 ${
+            !canScrollNext ? 'opacity-30 cursor-default' : 'hover:opacity-75'
+          }`}
+          onClick={scrollNext}
+          disabled={!canScrollNext}
+          aria-label="Next slide"
+        >
+          <ChevronRight className="w-8 h-8 text-[#373737]" />
+        </button>
       </div>
 
       <div className="flex justify-center gap-2 mt-4">
