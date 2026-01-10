@@ -136,15 +136,15 @@ const ModelsMenu = () => {
 
       {/* Filter Menu - Desktop */}
       <div className="hidden lg:flex items-center gap-[20px]">
-        <span className="text-[14px] font-semibold text-[#373737] tracking-[0.08px]">
+        <span className="text-[14px] font-semibold text-[#373737] tracking-[0.08px] mr-[20px]">
           Filtrar por
         </span>
-        <div className="flex items-center gap-[6px]">
+        <div className="flex items-center gap-[24px]">
           {filterOptions.map((option, index) => (
             <button
               key={index}
               onClick={() => handleFilterSelect(option)}
-              className={`px-[16px] py-[6px] rounded-[18px] text-[14px] transition-all duration-200 ${
+              className={`px-[16px] py-[6px] rounded-[18px] text-[14px] transition-all duration-200 hover:bg-[#F7F7F7] ${
                 selectedFilter === option
                   ? 'bg-[#F7F7F7] text-[#373737] font-medium'
                   : 'text-foreground hover:text-[#373737]'
