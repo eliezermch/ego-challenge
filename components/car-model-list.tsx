@@ -55,14 +55,14 @@ const CarModelList = async ({ searchParams }: CarModelListProps) => {
 
   return (
     <div>
-      <ul className="grid grid-cols-[repeat(auto-fill,minmax(250px,1fr))] gap-[38px] px-[54px] my-[60px] lg:px-[148px] lg:grid-cols-[repeat(auto-fill,minmax(269px,1fr))] lg:gap-[20px] lg:gap-y-[80px]">
+      <ul className="grid grid-cols-[repeat(auto-fill,minmax(250px,1fr))] gap-[38px] px-[54px] my-[60px] lg:px-[148px] lg:grid-cols-[repeat(auto-fill,minmax(269px,1fr))] lg:gap-[20px] lg:gap-y-[60px]">
         {filteredModels.map((model: CarModel) => (
           <li key={model.id}>
             <Link
               href={`/models/${model.id}`}
-              className="flex flex-col items-center gap-[6px]"
+              className="flex flex-col items-center gap-[6px] group"
             >
-              <h2 className="text-[28px] font-semibold tracking-[-0.65px] leading-[30px]">
+              <h2 className="text-[28px] font-semibold tracking-[-0.65px] leading-[30px] group-hover:text-[#D0021B] transition-colors duration-200">
                 {model.name}
               </h2>
               <div className="flex items-center gap-[12px] text-[14px] font-regular tracking-[-0.28px]">
@@ -84,6 +84,9 @@ const CarModelList = async ({ searchParams }: CarModelListProps) => {
                 width={269}
                 height={132}
               />
+              <button className="bg-[#191919] text-white rounded-[30px] px-[28px] py-[10px] text-[14px] leading-[16px] font-regular tracking-[0.2px] opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                Ver Modelo
+              </button>
             </Link>
           </li>
         ))}
