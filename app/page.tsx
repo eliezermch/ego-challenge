@@ -1,18 +1,19 @@
-import { ThemeToggle } from "@/components/theme-toggle";
+import { CarModelList } from '@/components/car-model-list';
+import { ModelsMenu } from '@/components/models-menu';
 
-export default function Home() {
+export default async function Home(props: {
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+}) {
+  const searchParams = await props.searchParams;
+
   return (
-    <div className="flex min-h-screen items-center justify-center font-sans bg-background text-foreground">
-      <main className="flex min-h-screen w-full flex-col items-center justify-between sm:items-start">
-        <div className="flex w-full items-center justify-between">
-            <h1 className="text-3xl font-bold text-primary">Home</h1>
-            <ThemeToggle />
-        </div>
-        <div className="mt-10 p-10 border border-color-border rounded-lg bg-carousel-bg">
-            <p className="text-pagination-active-color">This is a sample box to test colors.</p>
-            <p className="text-secondary mt-2">Secondary text color.</p>
-        </div>
-      </main>
-    </div>
+    <main className="max-w-[1920px] mx-auto w-full min-h-screen">
+      <h1 className="text-foreground text-[35px] leading-[44px] tracking-[-0.7px] font-bold p-[15px] mt-[35px] mb-[24px] lg:text-[50px] lg:leading-[57px] lg:tracking-[-1px] lg:px-[0px] lg:ml-[148px] lg:text-secondary">
+        Descubrí todos los modelos
+      </h1>
+
+      <ModelsMenu />
+      <CarModelList searchParams={searchParams} />
+    </main>
   );
 }

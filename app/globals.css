@@ -1,17 +1,17 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  --background: #FFFFFF;
+  --background: #ffffff;
   --foreground: #191919;
-  --color-border: #CCCCCC;
-  --color-border-secondary: #D8D8D8;
+  --color-border: #cccccc;
+  --color-border-secondary: #d8d8d8;
   --primary: #191919;
   --secondary: #373737;
-  --carousel-bg: #F7F7F7;
-  --pagination-active-color: #4A4A4A;
-  --pagination-color: #C5C5C5;
+  --carousel-bg: #f7f7f7;
+  --pagination-active-color: #4a4a4a;
+  --pagination-color: #c5c5c5;
 }
 
 /* For manual class-based dark mode switching via next-themes */
@@ -37,7 +37,7 @@
   --color-carousel-bg: var(--carousel-bg);
   --color-pagination-active: var(--pagination-active-color);
   --color-pagination: var(--pagination-color);
-  
+
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
@@ -48,5 +48,8 @@
   } */
   body {
     @apply bg-background text-foreground;
+  }
+  button {
+    @apply cursor-pointer;
   }
 }
