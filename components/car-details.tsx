@@ -39,7 +39,7 @@ const CarDetails = ({
 
   const getDesktopLayout = () => {
     if (type === 'hero')
-      return 'max-w-[1920px] mx-auto lg:flex-row lg:items-center lg:justify-between lg:gap-[40px] lg:px-[148px] lg:mt-[60px] lg:gap-[80px]';
+      return 'max-w-[1920px] mx-auto lg:flex-row lg:items-center lg:justify-between  lg:px-[148px] lg:mt-[60px] ';
     if (type === 'details') {
       return index % 2 === 0
         ? 'max-w-[1920px] mx-auto lg:flex-row-reverse lg:items-center lg:justify-between lg:gap-[40px] lg:px-[148px] lg:gap-[120px]'
@@ -52,7 +52,7 @@ const CarDetails = ({
     <div
       className={`flex flex-col ${getDesktopLayout()} ${className} ${
         type === 'hero' || type === 'details'
-          ? 'px-[15px] mt-[40px] last:mt-[0px] last:mb-[10px] lg:last:mb-[60px] pb-[60px] gap-[6px]'
+          ? 'px-[15px] mt-[40px] last:mt-[0px] last:mb-[10px] lg:last:mb-[60px] pb-[70px] gap-[6px]'
           : 'px-[15px] lg:px-[0px] lg:mt-[0px] mb-[20px] gap-[16px]'
       }`}
     >
@@ -71,10 +71,14 @@ const CarDetails = ({
           height={imageHeightMobile}
         />
         <Image
-          className={`w-full object-cover rounded-[6px] hidden lg:block ${
+          className={`w-full rounded-[6px] hidden lg:block ${
             type === 'hero' || type === 'details'
               ? 'mb-[20px] lg:mb-0'
               : 'mb-[4px] w-[268px] h-[146px]'
+          } ${
+            type === 'hero'
+              ? 'w-[559px] h-[320px] object-contain'
+              : 'object-cover'
           }`}
           src={photo}
           alt={title}
@@ -86,7 +90,7 @@ const CarDetails = ({
       <div
         className={`flex flex-col items-start  ${
           type === 'hero' || type === 'details'
-            ? 'lg:w-1/2 gap-[20px]'
+            ? 'lg:w-[40%] gap-[20px]'
             : 'gap-[16px]'
         } ${type === 'details' && index % 2 === 0 ? 'lg:pl-[40px]' : ''}`}
       >

@@ -8,7 +8,7 @@ export default async function Home(props: {
 
   return (
     <main className="max-w-[1920px] mx-auto w-full min-h-screen">
-      <h1 className="text-foreground text-[35px] leading-[44px] tracking-[-0.7px] font-bold p-[15px] mt-[35px] mb-[24px] lg:text-[50px] lg:leading-[57px] lg:tracking-[-1px] lg:px-[0px] lg:ml-[148px] lg:text-secondary">
+      <h1 className="text-foreground text-[35px] leading-[44px] tracking-[-0.7px] font-bold p-[15px] mt-[35px] mb-[24px] lg:text-[50px] lg:leading-[57px] lg:tracking-[-1px] lg:px-[0px] lg:ml-[148px] lg:text-secondary lg:mt-[60px] lg:mb-[50px]">
         Descubrí todos los modelos
       </h1>
 
