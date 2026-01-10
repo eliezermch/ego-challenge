@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 
@@ -6,7 +7,14 @@ interface NavigationMenuProps {
 }
 
 export const NavigationMenu = ({ onClose }: NavigationMenuProps) => {
-  const sections = [
+  useEffect(() => {
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, []);
+
+  const mainSections = [
     {
       links: [
         'Modelos',
@@ -25,49 +33,59 @@ export const NavigationMenu = ({ onClose }: NavigationMenuProps) => {
     {
       links: ['Concesionarios', 'Test Drive', 'Contacto'],
     },
-    {
-      links: [
-        'Actividades',
-        'Servicios al Cliente',
-        'Ventas Especiales',
-        'Innovación',
-        'Prensa',
-        'Acerca de...',
-      ],
-    },
+  ];
+
+  const footerLinks = [
+    'Actividades',
+    'Servicios al Cliente',
+    'Ventas Especiales',
+    'Innovación',
+    'Prensa',
+    'Acerca de...',
   ];
 
   return (
-    <div className="fixed top-[70px] left-0 w-full h-[calc(100vh-70px)] bg-background z-40 overflow-y-auto">
-      <div className="container mx-auto mx-[15px] pt-[20px] flex flex-col items-end">
-        <div className="w-full flex justify-end mr-[30px] mb-4">
+    <div className="fixed top-[70px] left-0 w-full h-[calc(100vh-70px)] z-40 flex">
+      <div
+        className="flex-1 bg-[#191919] opacity-[0.9] cursor-pointer"
+        onClick={onClose}
+      />
+
+      <div className="w-full lg:w-[400px] h-full bg-white flex flex-col overflow-y-auto">
+        <div className="flex justify-end p-[20px] lg:pt-[31px] lg:pr-[36px]">
           <button
             onClick={onClose}
-            className="flex items-center gap-2 text-foreground group"
+            className="flex items-center gap-[10px] text-foreground group focus:outline-none"
           >
-            <span className="text-[14px]">Cerrar</span>
+            <span className="text-[14px] font-regular tracking-[0.08px]">
+              Cerrar
+            </span>
             <Image
               src="/assets/icons/close.svg"
               alt="Cerrar"
-              width={15}
-              height={15}
-              className="group-hover:opacity-70"
+              width={16}
+              height={16}
+              className="group-hover:opacity-70 transition-opacity"
             />
           </button>
         </div>
 
-        <div className="grid grid-cols-1 gap-0 w-full text-right">
-          {sections.map((section, index) => (
+        <div className="flex-1 flex flex-col items-end justify-center pr-[36px] pb-[40px] gap-[35px]">
+          {mainSections.map((section, index) => (
             <div
               key={index}
-              className="flex flex-col gap-4 items-end py-[24px] border-b-[1px] border-[#E9E9E9] last:border-none last:bg-[#EFEEEF] mx-[15px] last:mx-[0px] :nth-child(2):mx-[0px] nth-3:border-none"
+              className={`flex flex-col gap-2 items-end w-full ${
+                index !== mainSections.length - 1
+                  ? 'border-b border-[#E9E9E9] pb-[35px]'
+                  : ''
+              }`}
             >
-              <ul className="flex flex-col gap-2 items-end mr-[38px]">
+              <ul className="flex flex-col gap-[10px] items-end">
                 {section.links.map((link, linkIndex) => (
-                  <li key={linkIndex}>
+                  <li key={linkIndex} className="text-right">
                     <Link
                       href="#"
-                      className="text-[#000000] transition-colors text-[20px] font-regular"
+                      className="text-[#191919] text-[20px] font-regular tracking-[0.2px] hover:text-[#D0021B] transition-colors block leading-[30px]"
                     >
                       {link}
                     </Link>
@@ -76,6 +94,21 @@ export const NavigationMenu = ({ onClose }: NavigationMenuProps) => {
               </ul>
             </div>
           ))}
+        </div>
+
+        <div className="bg-[#EFEEEF] py-[40px] pr-[36px] flex flex-col items-end">
+          <ul className="flex flex-col gap-[8px] items-end">
+            {footerLinks.map((link, index) => (
+              <li key={index} className="text-right">
+                <Link
+                  href="#"
+                  className="text-[#191919] text-[20px] font-normal tracking-[0.08px] hover:text-[#D0021B] transition-colors block leading-[28px]"
+                >
+                  {link}
+                </Link>
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
     </div>
