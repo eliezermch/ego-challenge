@@ -1,6 +1,8 @@
 export const EGO_API_URL = process.env.EGO_API_URL || 'http://localhost:1337';
 
 export async function getCarModels() {
+  'use cache';
+
   try {
     const response = await fetch(`${EGO_API_URL}/api/models/`);
     if (!response.ok) {
