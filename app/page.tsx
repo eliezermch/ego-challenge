@@ -1,10 +1,18 @@
+import { Metadata } from 'next';
+import { Suspense } from 'react';
 import { CarModelList } from '@/components/car-model-list';
 import { ModelsMenu } from '@/components/models-menu';
 
-export default async function Home(props: {
-  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
-}) {
-  const searchParams = await props.searchParams;
+export const metadata: Metadata = {
+  title: 'Ego Challenge | Modelos',
+  description:
+    'Descubrí todos los modelos que tenemos para vos. Encontrá tu próximo auto, pickup o SUV.',
+};
+
+import { getCarModels } from '@/actions/car-models';
+
+export default async function Home() {
+  const carModels = await getCarModels();
 
   return (
     <main className="max-w-[1920px] mx-auto w-full min-h-screen">
@@ -12,8 +20,18 @@ export default async function Home(props: {
         Descubrí todos los modelos
       </h1>
 
-      <ModelsMenu />
-      <CarModelList searchParams={searchParams} />
+      <Suspense fallback={<div className="h-[60px] w-full" />}>
+        <ModelsMenu />
+      </Suspense>
+      <Suspense
+        fallback={
+          <div className="min-h-[50vh] flex items-center justify-center">
+            Loading...
+          </div>
+        }
+      >
+        <CarModelList initialModels={carModels} />
+      </Suspense>
     </main>
   );
 }

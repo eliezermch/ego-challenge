@@ -85,7 +85,10 @@ const Navbar = () => {
           </button>
         </div>
       </nav>
-      {isMenuOpen && <NavigationMenu onClose={() => setIsMenuOpen(false)} />}
+      <NavigationMenu
+        isOpen={isMenuOpen}
+        onClose={() => setIsMenuOpen(false)}
+      />
     </>
   );
 };

@@ -115,23 +115,27 @@ const ModelsMenu = () => {
           />
         </button>
 
-        {activeFilter && (
-          <div className="absolute top-full left-0 mt-[10px] w-[158px] h-[145px] bg-white shadow-[2px_8px_20px_0px_rgba(0,0,0,0.14)] rounded-[6px] z-50 flex flex-col justify-between">
-            {filterOptions.map((option, index) => (
-              <button
-                key={index}
-                className={`text-left pl-[8px] py-[10px] border-b-[1px] border-[#D8D8D8] last:border-b-0 text-foreground hover:bg-[#F7F7F7] hover:font-bold ${
-                  selectedFilter === option ? 'bg-[#D1D6D634]' : ''
-                }`}
-                onClick={() => handleFilterSelect(option)}
-              >
-                <p className="text-[10px] font-regular tracking-[-0.1px]">
-                  {option}
-                </p>
-              </button>
-            ))}
-          </div>
-        )}
+        <div
+          className={`absolute top-full left-0 mt-[10px] w-[158px] h-[145px] bg-white shadow-[2px_8px_20px_0px_rgba(0,0,0,0.14)] rounded-[6px] z-50 flex flex-col justify-between transition-all duration-200 ease-in-out transform origin-top-left ${
+            activeFilter
+              ? 'opacity-100 scale-100 visible pointer-events-auto'
+              : 'opacity-0 scale-95 invisible pointer-events-none'
+          }`}
+        >
+          {filterOptions.map((option, index) => (
+            <button
+              key={index}
+              className={`text-left pl-[8px] py-[10px] border-b-[1px] border-[#D8D8D8] last:border-b-0 text-foreground hover:bg-[#F7F7F7] hover:font-bold ${
+                selectedFilter === option ? 'bg-[#D1D6D634]' : ''
+              }`}
+              onClick={() => handleFilterSelect(option)}
+            >
+              <p className="text-[10px] font-regular tracking-[-0.1px]">
+                {option}
+              </p>
+            </button>
+          ))}
+        </div>
       </div>
 
       {/* Filter Menu - Desktop */}
@@ -180,23 +184,27 @@ const ModelsMenu = () => {
           />
         </button>
 
-        {activeSort && (
-          <div className="absolute top-full right-0 mt-[10px] w-[158px] h-[182px] bg-white shadow-[2px_8px_20px_0px_rgba(0,0,0,0.14)] rounded-[6px] z-50 flex flex-col justify-between">
-            {sortOptions.map((option, index) => (
-              <button
-                key={index}
-                className={`text-left pl-[8px] py-[10px] border-b-[1px] border-[#D8D8D8] last:border-b-0 text-[14px] text-foreground hover:bg-[#F7F7F7] hover:font-bold ${
-                  selectedSort === option.value ? 'bg-[#D1D6D634]' : ''
-                }`}
-                onClick={() => handleSortSelect(option.value)}
-              >
-                <p className="text-[10px] font-regular tracking-[-0.1px]">
-                  {option.label}
-                </p>
-              </button>
-            ))}
-          </div>
-        )}
+        <div
+          className={`absolute top-full right-0 mt-[10px] w-[158px] h-[182px] bg-white shadow-[2px_8px_20px_0px_rgba(0,0,0,0.14)] rounded-[6px] z-50 flex flex-col justify-between transition-all duration-200 ease-in-out transform origin-top-right ${
+            activeSort
+              ? 'opacity-100 scale-100 visible pointer-events-auto'
+              : 'opacity-0 scale-95 invisible pointer-events-none'
+          }`}
+        >
+          {sortOptions.map((option, index) => (
+            <button
+              key={index}
+              className={`text-left pl-[8px] py-[10px] border-b-[1px] border-[#D8D8D8] last:border-b-0 text-[14px] text-foreground hover:bg-[#F7F7F7] hover:font-bold ${
+                selectedSort === option.value ? 'bg-[#D1D6D634]' : ''
+              }`}
+              onClick={() => handleSortSelect(option.value)}
+            >
+              <p className="text-[10px] font-regular tracking-[-0.1px]">
+                {option.label}
+              </p>
+            </button>
+          ))}
+        </div>
       </div>
     </div>
   );
