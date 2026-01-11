@@ -4,15 +4,20 @@ import Image from 'next/image';
 
 interface NavigationMenuProps {
   onClose: () => void;
+  isOpen: boolean;
 }
 
-export const NavigationMenu = ({ onClose }: NavigationMenuProps) => {
+export const NavigationMenu = ({ onClose, isOpen }: NavigationMenuProps) => {
   useEffect(() => {
-    document.body.style.overflow = 'hidden';
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
     return () => {
       document.body.style.overflow = 'unset';
     };
-  }, []);
+  }, [isOpen]);
 
   const mainSections = [
     {
@@ -45,14 +50,26 @@ export const NavigationMenu = ({ onClose }: NavigationMenuProps) => {
   ];
 
   return (
-    <div className="fixed top-[70px] left-0 w-full h-[calc(100vh-70px)] z-40 flex">
+    <div
+      className={`fixed top-[70px] right-0 bottom-0 left-0 z-40 flex justify-end transition-all duration-300 ${
+        isOpen
+          ? 'pointer-events-auto visible'
+          : 'pointer-events-none invisible delay-300'
+      }`}
+    >
       <div
-        className="flex-1 bg-[#191919] opacity-[0.9] cursor-pointer"
+        className={`absolute inset-0 bg-[#191919] transition-opacity duration-300 ${
+          isOpen ? 'opacity-90' : 'opacity-0'
+        }`}
         onClick={onClose}
       />
 
-      <div className="w-full lg:w-[400px] h-full bg-white flex flex-col overflow-y-auto">
-        <div className="flex justify-end p-[20px] lg:pt-[31px] lg:pr-[36px]">
+      <div
+        className={`relative w-full lg:w-[400px] h-full bg-white flex flex-col overflow-y-auto transform transition-transform duration-300 ease-in-out ${
+          isOpen ? 'translate-x-0' : 'translate-x-full'
+        }`}
+      >
+        <div className="flex justify-end p-[20px] lg:pt-[31px] lg:pr-[42px]">
           <button
             onClick={onClose}
             className="flex items-center gap-[10px] text-foreground group focus:outline-none"
@@ -70,7 +87,7 @@ export const NavigationMenu = ({ onClose }: NavigationMenuProps) => {
           </button>
         </div>
 
-        <div className="flex-1 flex flex-col items-end justify-center pr-[36px] pb-[40px] gap-[35px]">
+        <div className="flex-1 flex flex-col items-end justify-center pr-[36px] lg:pr-[64px] pb-[40px] gap-[35px]">
           {mainSections.map((section, index) => (
             <div
               key={index}
