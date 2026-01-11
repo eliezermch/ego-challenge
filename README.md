@@ -2,9 +2,7 @@
 
 An elegant and responsive web application for browsing and exploring car models, built with modern web technologies.
 
-![App Screenshot](/public/assets/images/capture_ec_062036PM_260111.png)
-
-> _Note: If you have a screenshot of the app, place it in public/ and update the path above, otherwise this placeholder assumes the OG image exists or you can remove this line._
+![App Screenshot](/public/assets/images/capture_ec_063341PM_260111.png)
 
 ## 🚀 Features
 
