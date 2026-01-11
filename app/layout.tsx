@@ -9,8 +9,42 @@ const montserrat = Montserrat({
 });
 
 export const metadata: Metadata = {
-  title: 'Ego Challenge',
-  description: 'Ego Agency Frontend Challenge ',
+  title: {
+    default: 'Ego Challenge',
+    template: '%s | Ego Challenge',
+  },
+  description:
+    'Descubrí los mejores modelos de autos, pickups y SUVs en Ego Challenge. Innovación, confort y rendimiento.',
+  keywords: [
+    'autos',
+    'camionetas',
+    'suv',
+    'toyota',
+    'ego challenge',
+    'modelos',
+  ],
+  authors: [{ name: 'Ego Challenge Team' }],
+  creator: 'Ego Challenge',
+  publisher: 'Ego Challenge',
+  robots: {
+    index: true,
+    follow: true,
+  },
+  openGraph: {
+    title: 'Ego Challenge',
+    description:
+      'Descubrí los mejores modelos de autos, pickups y SUVs en Ego Challenge.',
+    url: 'https://ego-challenge.vercel.app',
+    siteName: 'Ego Challenge',
+    locale: 'es_AR',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Ego Challenge',
+    description:
+      'Descubrí los mejores modelos de autos, pickups y SUVs en Ego Challenge.',
+  },
 };
 
 export default function RootLayout({

@@ -1,13 +1,36 @@
+import { Metadata } from 'next';
 import { getCarModelById } from '@/actions/car';
 import { CarDetails } from '@/components/car-details';
 import { FeaturesCarousel } from '@/components/features-carousel';
 import { CarModel, ModelHighlight } from '@/types/car-model';
 
-export default async function ModelPage({
-  params,
-}: {
+type Props = {
   params: Promise<{ id: string }>;
-}) {
+};
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { id } = await params;
+  const model: CarModel = await getCarModelById(id);
+
+  return {
+    title: model.name,
+    description: model.title + ' - ' + model.description.substring(0, 150),
+    openGraph: {
+      title: `${model.name} | Ego Challenge`,
+      description: model.title,
+      images: [
+        {
+          url: model.photo,
+          width: 800,
+          height: 600,
+          alt: model.name,
+        },
+      ],
+    },
+  };
+}
+
+export default async function ModelPage({ params }: Props) {
   const { id } = await params;
   const model: CarModel = await getCarModelById(id);
   return (

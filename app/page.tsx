@@ -1,5 +1,12 @@
+import { Metadata } from 'next';
 import { CarModelList } from '@/components/car-model-list';
 import { ModelsMenu } from '@/components/models-menu';
+
+export const metadata: Metadata = {
+  title: 'Ego Challenge | Modelos',
+  description:
+    'Descubrí todos los modelos que tenemos para vos. Encontrá tu próximo auto, pickup o SUV.',
+};
 
 export default async function Home(props: {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
