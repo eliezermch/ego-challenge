@@ -1,5 +1,6 @@
 import { Metadata } from 'next';
 import { getCarModelById } from '@/actions/car';
+import { getCarModels } from '@/actions/car-models';
 import { CarDetails } from '@/components/car-details';
 import { FeaturesCarousel } from '@/components/features-carousel';
 import { CarModel, ModelHighlight } from '@/types/car-model';
@@ -7,6 +8,13 @@ import { CarModel, ModelHighlight } from '@/types/car-model';
 type Props = {
   params: Promise<{ id: string }>;
 };
+
+export async function generateStaticParams() {
+  const models: CarModel[] = await getCarModels();
+  return models.map((model) => ({
+    id: model.id.toString(),
+  }));
+}
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { id } = await params;
