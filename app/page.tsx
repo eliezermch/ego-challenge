@@ -20,7 +20,9 @@ export default async function Home() {
         Descubrí todos los modelos
       </h1>
 
-      <ModelsMenu />
+      <Suspense fallback={<div className="h-[60px] w-full" />}>
+        <ModelsMenu />
+      </Suspense>
       <Suspense
         fallback={
           <div className="min-h-[50vh] flex items-center justify-center">
