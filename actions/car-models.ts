@@ -6,9 +6,7 @@ export async function getCarModels() {
   try {
     const response = await fetch(`${EGO_API_URL}/api/models/`);
     if (!response.ok) {
-      throw new Error(
-        `Error fetching data from Strapi: ${response.statusText}`
-      );
+      throw new Error(`Error fetching data from Ego: ${response.statusText}`);
     }
     const data = await response.json();
     return data;
