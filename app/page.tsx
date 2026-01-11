@@ -8,10 +8,10 @@ export const metadata: Metadata = {
     'Descubrí todos los modelos que tenemos para vos. Encontrá tu próximo auto, pickup o SUV.',
 };
 
-export default async function Home(props: {
-  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
-}) {
-  const searchParams = await props.searchParams;
+import { getCarModels } from '@/actions/car-models';
+
+export default async function Home() {
+  const carModels = await getCarModels();
 
   return (
     <main className="max-w-[1920px] mx-auto w-full min-h-screen">
@@ -20,7 +20,7 @@ export default async function Home(props: {
       </h1>
 
       <ModelsMenu />
-      <CarModelList searchParams={searchParams} />
+      <CarModelList initialModels={carModels} />
     </main>
   );
 }

@@ -1,53 +1,60 @@
-import { getCarModels } from '@/actions/car-models';
+'use client';
+
+import { useSearchParams } from 'next/navigation';
 import { CarModel } from '@/types/car-model-list';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useMemo } from 'react';
 
 interface CarModelListProps {
-  searchParams: { [key: string]: string | string[] | undefined };
+  initialModels: CarModel[];
 }
 
-const CarModelList = async ({ searchParams }: CarModelListProps) => {
-  const data = await getCarModels();
+const CarModelList = ({ initialModels }: CarModelListProps) => {
+  const searchParams = useSearchParams();
 
-  let filteredModels = [...data];
+  const filteredModels = useMemo(() => {
+    let models = [...initialModels];
 
-  // Filter by Segment
-  const segment = searchParams.segment as string;
-  if (segment && segment !== 'Todos') {
-    filteredModels = filteredModels.filter((model: CarModel) => {
-      // Map menu options to API segments
-      if (segment === 'Autos') {
-        return model.segment === 'Sedan' || model.segment === 'Hatchback';
-      }
-      if (segment === 'SUVs y Crossovers') {
-        return model.segment === 'SUVs';
-      }
-      if (segment === 'Pickups y Comerciales') {
-        return model.segment === 'Pickups y Comerciales';
-      }
-      return model.segment === segment;
-    });
-  }
+    // Filter by Segment
+    const segment = searchParams.get('segment');
+    if (segment && segment !== 'Todos') {
+      models = models.filter((model: CarModel) => {
+        // Map menu options to API segments
+        if (segment === 'Autos') {
+          return model.segment === 'Sedan' || model.segment === 'Hatchback';
+        }
+        if (segment === 'SUVs y Crossovers') {
+          return model.segment === 'SUVs';
+        }
+        if (segment === 'Pickups y Comerciales') {
+          return model.segment === 'Pickups y Comerciales';
+        }
+        return model.segment === segment;
+      });
+    }
 
-  // Sort Logic
-  const sort = searchParams.sort as string;
-  if (sort && sort !== 'Nada') {
-    filteredModels.sort((a: CarModel, b: CarModel) => {
-      switch (sort) {
-        case 'price_asc':
-          return a.price - b.price;
-        case 'price_desc':
-          return b.price - a.price;
-        case 'year_desc':
-          return b.year - a.year;
-        case 'year_asc':
-          return a.year - b.year;
-        default:
-          return 0;
-      }
-    });
-  }
+    // Sort Logic
+    const sort = searchParams.get('sort');
+    if (sort && sort !== 'Nada') {
+      models.sort((a: CarModel, b: CarModel) => {
+        switch (sort) {
+          case 'price_asc':
+            return a.price - b.price;
+          case 'price_desc':
+            return b.price - a.price;
+          case 'year_desc':
+            return b.year - a.year;
+          case 'year_asc':
+            return a.year - b.year;
+          default:
+            return 0;
+        }
+      });
+    }
+
+    return models;
+  }, [initialModels, searchParams]);
 
   const parsePrice = (_price: number) => {
     return new Intl.NumberFormat('de-DE').format(_price);
