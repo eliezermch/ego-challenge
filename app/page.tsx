@@ -1,4 +1,5 @@
 import { Metadata } from 'next';
+import { Suspense } from 'react';
 import { CarModelList } from '@/components/car-model-list';
 import { ModelsMenu } from '@/components/models-menu';
 
@@ -20,7 +21,15 @@ export default async function Home() {
       </h1>
 
       <ModelsMenu />
-      <CarModelList initialModels={carModels} />
+      <Suspense
+        fallback={
+          <div className="min-h-[50vh] flex items-center justify-center">
+            Loading...
+          </div>
+        }
+      >
+        <CarModelList initialModels={carModels} />
+      </Suspense>
     </main>
   );
 }
