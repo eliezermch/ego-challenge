@@ -69,7 +69,7 @@ const CarModelList = ({ initialModels }: CarModelListProps) => {
               href={`/models/${model.id}`}
               className="flex flex-col items-center gap-[6px] group"
             >
-              <h2 className="text-[28px] font-semibold tracking-[-0.65px] leading-[30px] group-hover:text-[#D0021B] transition-colors duration-200">
+              <h2 className="text-[28px] text-[#000000] font-semibold tracking-[-0.65px] leading-[30px] group-hover:text-[#D0021B] transition-colors duration-200">
                 {model.name}
               </h2>
               <div className="flex items-center gap-[12px] text-[14px] font-regular tracking-[-0.28px]">

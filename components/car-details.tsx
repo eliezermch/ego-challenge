@@ -100,11 +100,13 @@ const CarDetails = ({
           </span>
         )}
         <h1
-          className={`text-foreground font-semibold tracking-[-0.7px] ${
+          className={`font-semibold tracking-[-0.7px] ${
             type === 'hero'
-              ? 'text-[35px] leading-[44px] lg:text-[50px] lg:leading-[57px] lg:text-secondary'
+              ? 'text-foreground text-[35px] leading-[44px] lg:text-[50px] lg:leading-[57px] lg:text-secondary'
               : 'text-[20px]'
-          } ${type === 'details' ? 'lg:text-[20px]' : ''}`}
+          } ${type === 'details' ? 'text-secondary lg:text-[20px]' : ''} ${
+            type === 'features' ? 'text-secondary' : ''
+          }`}
         >
           {title}
         </h1>
